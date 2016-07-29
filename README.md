@@ -21,19 +21,6 @@ The Grafana Dashboard is now accessible via: `http://<Host IP Address>:3000` for
 username - admin
 password - foobar (Password is stored in the `config.monitoring` env file)
 
-## Post Configuration
-Now we need to create the Prometheus Datasource in order to connect Grafana to Prometheues 
-* Click the `Grafana` Menu at the top left corner (looks like a fireball)
-* Click `Data Sources`
-* Click the green button `Add Data Source`.
-
-<img src="https://github.com/vegasbrianc/prometheus/blob/version-2/images/Add_Data_Source.png" width="400" heighth="400">
-
-## Install Dashboard
-I created a Dashboard template which is available on [Grafana Docker Dashboard](https://grafana.net/dashboards/179). Simply download the dashboard and select from the Grafana menu -> Dashboards -> Import
-
-This dashboard is intended to help you get started with monitoring. If you have any changes you would like to see in the Dashboard let me know so I can update Grafana site as well.
-
-Here's the Dashboard Template
+## Screenshots
 
 ![Grafana Dashboard](https://github.com/vegasbrianc/prometheus/blob/version-2/images/Dashboard.png)
