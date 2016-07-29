@@ -61,3 +61,13 @@ services:
     networks:
       - back-tier
       - front-tier
+
+  grafana-init:
+    image: dorowu/prometheus-grafana-init:v1
+    links:
+      - grafana:grafana
+    depends_on:
+      - grafana
+    networks:
+      - front-tier
+    restart: on-failure
