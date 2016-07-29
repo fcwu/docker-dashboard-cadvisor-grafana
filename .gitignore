@@ -1,0 +1,4 @@
+qpkg/build
+qpkg/shared/config.monitoring
+qpkg/shared/docker-compose.yml
+qpkg/shared/prometheus

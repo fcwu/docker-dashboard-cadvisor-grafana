@@ -1,0 +1,73 @@
+version: '2'
+
+volumes:
+    prometheus_data: {}
+    grafana_data: {}
+
+networks:
+  front-tier:
+    driver: bridge
+  back-tier:
+    driver: bridge
+
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    command:
+      - '-config.file=/etc/prometheus/prometheus.yml'
+      - '-storage.local.path=/prometheus'
+    expose:
+      - 9090
+    links:
+      - cadvisor:cadvisor
+    depends_on:
+      - cadvisor
+    networks:
+      - back-tier
+  
+  node-exporter:
+    image: prom/node-exporter
+    expose:
+      - 9100
+    networks:
+      - back-tier
+  
+  cadvisor:
+    image: google/cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    expose:
+      - 8080
+    networks:
+      - back-tier
+  
+  grafana:
+    image: grafana/grafana
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+    env_file:
+      - config.monitoring
+    networks:
+      - back-tier
+      - front-tier
+
+  grafana-init:
+    image: dorowu/prometheus-grafana-init:v1
+    links:
+      - grafana:grafana
+    depends_on:
+      - grafana
+    networks:
+      - front-tier
+    restart: on-failure
