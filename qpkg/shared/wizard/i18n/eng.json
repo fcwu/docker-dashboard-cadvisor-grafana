@@ -1,0 +1,17 @@
+{
+  "WIZARD_NAME": "Docker Monitor",
+  "WIZARD_NETWORK_PAGE": "Configure Network Settings",
+  "NETWORK_IFACE": "Network Interface",
+  "NETWORK_IFACE_DESC": "Select a network interface to binding service",
+  "NETWORK_ADDR": "IP address",
+  "NETWORK_ADDR_DESC": "Setting IP address, For example: 192.168.1.2",
+  "NETWORK_ADDR_MSG": "Please enter a valid IP address",
+  "NETWORK_SUBNET": "Subnet",
+  "NETWORK_SUBNET_DESC": "Setting subnetwork, For example: 192.168.1.0/24",
+  "NETWORK_SUBNET_MSG": "Please enter a valid subnet address",
+  "NETWORK_DEF_GATEWAY": "Default Gateway",
+  "NETWORK_DEF_GATEWAY_DESC": "Setting default gateway, For example: 192.168.1.1",
+  "NETWORK_DEF_GATEWAY_MSG": "Please enter a valid gateway address",
+  "NETWORK_DHCP_MODE_LABEL": "Obtain IP address settings automatically via DHCP",
+  "NETWORK_STATIC_MODE_LABEL": "Use static IP Address"
+}

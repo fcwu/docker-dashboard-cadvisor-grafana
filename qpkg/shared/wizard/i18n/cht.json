@@ -1,0 +1,17 @@
+{
+  "WIZARD_NAME": "Docker Monitor",
+  "WIZARD_NETWORK_PAGE": "網路設定",
+  "NETWORK_IFACE": "網路界面卡",
+  "NETWORK_IFACE_DESC": "選擇一張網路卡來使用",
+  "NETWORK_ADDR": "IP 位址",
+  "NETWORK_ADDR_DESC": "設定 IP 位址，例如：192.168.1.2",
+  "NETWORK_ADDR_MSG": "請輸入正確的 IP 位址",
+  "NETWORK_SUBNET": "子網路",
+  "NETWORK_SUBNET_DESC": "設定子網路，例如：192.168.1.0/24",
+  "NETWORK_SUBNET_MSG": "請輸入正確的子網路位址",
+  "NETWORK_DEF_GATEWAY": "預設閘道器",
+  "NETWORK_DEF_GATEWAY_DESC": "設定網路預設閘道器，例如：192.168.1.1",
+  "NETWORK_DEF_GATEWAY_MSG": "請輸入正確的閘道器位址",
+  "NETWORK_DHCP_MODE_LABEL": "DHCP 自動取得 IP 位址",
+  "NETWORK_STATIC_MODE_LABEL": "固定 IP 位址"
+}

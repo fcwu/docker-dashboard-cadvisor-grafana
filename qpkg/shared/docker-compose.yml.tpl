@@ -1,43 +1,40 @@
 version: '2'
 
-volumes:
-    prometheus_data: {}
-    grafana_data: {}
-
 networks:
-  front-tier:
+  backtier:
     driver: bridge
-  back-tier:
-    driver: bridge
+    ipam:
+      driver: default
+  fronttier:
+    driver: qnet
+    ipam:
+      driver: qnet
+      driver_opts:
+        iface: DEFAULT_NIC
 
 services:
   prometheus:
     image: prom/prometheus
-    container_name: prometheus
+    restart: always
     volumes:
-      - ./prometheus/:/etc/prometheus/
-      - prometheus_data:/prometheus
+      - ${PWD}/data/prometheus/:/etc/prometheus/
+      - ${PWD}/data/prometheus-data/:/prometheus/
     command:
       - '-config.file=/etc/prometheus/prometheus.yml'
       - '-storage.local.path=/prometheus'
-    expose:
-      - 9090
-    links:
-      - cadvisor:cadvisor
     depends_on:
       - cadvisor
     networks:
-      - back-tier
+      - backtier
   
   node-exporter:
     image: prom/node-exporter
-    expose:
-      - 9100
     networks:
-      - back-tier
+      - backtier
   
   cadvisor:
     image: google/cadvisor
+    restart: always
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw
@@ -46,28 +43,25 @@ services:
     expose:
       - 8080
     networks:
-      - back-tier
+      - backtier
   
   grafana:
     image: grafana/grafana
+    restart: always
     depends_on:
       - prometheus
-    ports:
-      - 3000:3000
     volumes:
-      - grafana_data:/var/lib/grafana
+      - ${PWD}/data/grafana:/var/lib/grafana
     env_file:
-      - config.monitoring
+      - ${PWD}/config.monitoring
     networks:
-      - back-tier
-      - front-tier
+      - fronttier
+      - backtier
 
   grafana-init:
     image: dorowu/prometheus-grafana-init:v1
-    links:
-      - grafana:grafana
     depends_on:
       - grafana
     networks:
-      - front-tier
+      - backtier
     restart: on-failure
